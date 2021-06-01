@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setPreferredOrientations();
-  await configureInjection();
+  await configureInjection(Env.dev);
   return runZonedGuarded(() async {
     runApp(MyApp());
   }, (error, stack) {
@@ -21,7 +21,7 @@ Future<void> setPreferredOrientations() {
   return SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeRight,
-    DeviceOrientation.landscapeLeft,
+    // DeviceOrientation.landscapeRight,
+    // DeviceOrientation.landscapeLeft,
   ]);
 }

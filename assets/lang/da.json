@@ -12,6 +12,18 @@
   "home_tv_error": "Fejl",
   "home_tv_no_post_found": "Ingen indlæg fundet",
   "home_tv_choose_language": "Vælg sprog",
-  "home_end": "-------------------------------------------------------------------------------------"
+  "home_end": "-------------------------------------------------------------------------------------",
+
+  "get_started_description_text" : "Join our love community with the smartest mobile wallet on earth",
+  "get_started_button_text" : "GET STARTED DA",
+  "get_started_sign_in_description" : "Already have an account?",
+  "get_started_sign_in_button_text" : "Sign in",
+  "get_started_change_lang_text" : "Change langauge",
+  "get_started_end": "-------------------------------------------------------------------------------" ,
+
+  "terms_and_conditions_title_nav" : "Terms and Conditions",
+  "terms_and_conditions_content" : "Welcome to Love!\n\nThese terms and conditions outline the rules and regulations for the use of Company Name's Website, located at Website.com.\n\nBy accessing this website we assume you accept these terms and conditions. Do not continue to use Website Name if you do not agree to take all of the terms and conditions stated on this page.\n\nThe following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: “Client”, “You” and “Your” refers to you, the person log on this website and compliant to the Company's terms and conditions. “The Company”, “Ourselves”, “We”, “Our” and “Us”, refers to our Company. “Party”, “Parties”, or “Us”, refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client's needs in respect of provision of the Company's stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.\n\nCookies\n\nWe employ the use of cookies. By accessing Website Name, you agreed to use cookies in agreement with the Company Name's Privacy Policy.\n\nMost interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.\n\nLicense\n\nUnless otherwise stated, Company Name and/or its licensors own the intellectual property rights for all material on Website Name. All intellectual property rights are reserved. You may access this from Website Name for your own personal use subjected to restrictions set in these terms and conditions." ,
+  "terms_and_conditions_accept_button_text": "ACCEPT TERMS",
+  "terms_and_conditions_end" : "-----------------------------------------------------------------------"
 
 }

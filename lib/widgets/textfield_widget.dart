@@ -1,7 +1,8 @@
+import 'package:boilerplate/constants/base.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
   final String? hint;
   final String? errorText;
   final bool isObscure;
@@ -31,23 +32,27 @@ class TextFieldWidget extends StatelessWidget {
         obscureText: this.isObscure,
         maxLength: 25,
         keyboardType: this.inputType,
-        style: Theme.of(context).textTheme.body1,
+        style: Base.b1Text,
         decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
             hintText: this.hint,
             hintStyle:
-                Theme.of(context).textTheme.body1!.copyWith(color: hintColor),
+                Base.captionText,
             errorText: errorText,
             counterText: '',
-            icon: this.isIcon ? Icon(this.icon, color: iconColor) : null),
+            border: new OutlineInputBorder(borderRadius: BorderRadius.circular(5),)
+            // icon: this.isIcon ? Icon(this.icon, color: iconColor) : null,
+          ),
       ),
     );
   }
 
   const TextFieldWidget({
     Key? key,
-    required this.icon,
     required this.errorText,
     required this.textController,
+    this.icon,
     this.inputType,
     this.hint,
     this.isObscure = false,

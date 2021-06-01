@@ -69,6 +69,18 @@ dependencies:
   injectable: ^1.3.0
   get_it: ^6.1.1
 
+  # SVG 
+  flutter_svg: ^0.22.0
+
+  # smart select
+  smart_select: 
+    git:
+      url: https://github.com/iktakahiro/flutter_smart_select.git
+      ref: null-safety
+
+  # country icons
+  country_icons: ^2.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -106,6 +118,7 @@ flutter:
   - assets/images/
   - assets/icons/
   - assets/lang/
+  - assets/images/flags/gb.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
@@ -126,6 +139,9 @@ flutter:
       style: italic
     - asset: assets/fonts/Product-Sans-Bold.ttf
       weight: 700
+  - family: SFProText
+    fonts:
+    - asset: assets/fonts/SFProText-Regular.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages

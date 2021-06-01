@@ -1,4 +1,4 @@
-import 'package:boilerplate/data/repository.dart';
+import 'package:boilerplate/data/repositories/lang/lang_repository.dart';
 import 'package:boilerplate/models/language/Language.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:injectable/injectable.dart';
@@ -13,7 +13,7 @@ abstract class _LanguageStore with Store {
   static const String TAG = "LanguageStore";
 
   // repository instance
-  final Repository _repository;
+  final LangRepository _repository;
 
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
@@ -26,7 +26,7 @@ abstract class _LanguageStore with Store {
   ];
 
   // constructor:---------------------------------------------------------------
-  _LanguageStore(Repository repository)
+  _LanguageStore(LangRepository repository)
       : this._repository = repository {
     init();
   }
@@ -74,8 +74,12 @@ abstract class _LanguageStore with Store {
     // getting current language from shared preference
     if(_repository.currentLanguage != null) {
       _locale = _repository.currentLanguage!;
+    } else {
+      _locale = 'en';
     }
   }
+
+  String? get getCurrentLanguage => _repository.currentLanguage;
 
   // dispose:-------------------------------------------------------------------
   @override

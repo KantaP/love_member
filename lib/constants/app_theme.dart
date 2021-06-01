@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/constants/font_family.dart';
 /**
@@ -26,20 +28,22 @@ import 'package:boilerplate/constants/font_family.dart';
 import 'package:flutter/material.dart';
 
 final ThemeData themeData = new ThemeData(
-    fontFamily: FontFamily.productSans,
+    fontFamily: (Platform.isIOS) ? FontFamily.sfProtext : FontFamily.roboto,
     brightness: Brightness.light,
-    primarySwatch: MaterialColor(AppColors.orange[500]!.value, AppColors.orange),
-    primaryColor: AppColors.orange[500],
+    primarySwatch: MaterialColor(AppColors.primaryColor[500]!.value, AppColors.primaryColor),
+    primaryColor: AppColors.primaryColor[500],
     primaryColorBrightness: Brightness.light,
-    accentColor: AppColors.orange[500],
-    accentColorBrightness: Brightness.light
+    accentColor: AppColors.primaryColor[500],
+    accentColorBrightness: Brightness.light,
+    primaryIconTheme: IconThemeData(color: Colors.white),
 );
 
 final ThemeData themeDataDark = ThemeData(
-  fontFamily: FontFamily.productSans,
+  fontFamily: (Platform.isIOS) ? FontFamily.sfProtext : FontFamily.roboto,
   brightness: Brightness.dark,
-  primaryColor: AppColors.orange[500],
+  primaryColor: AppColors.primaryColor[500],
   primaryColorBrightness: Brightness.dark,
-  accentColor: AppColors.orange[500],
+  accentColor: AppColors.primaryColor[500],
   accentColorBrightness: Brightness.dark,
+  primaryIconTheme: IconThemeData(color: Colors.white),
 );

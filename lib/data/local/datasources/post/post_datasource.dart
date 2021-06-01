@@ -1,18 +1,19 @@
 import 'package:boilerplate/data/local/constants/db_constants.dart';
+import 'package:boilerplate/data/local/datasources/_datasource.dart';
 import 'package:boilerplate/models/post/post.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sembast/sembast.dart';
 
 @Singleton()
-class PostDataSource {
+class PostDataSource implements DataSource {
   // A Store with int keys and Map<String, dynamic> values.
   // This Store acts like a persistent map, values of which are Flogs objects converted to Map
-  final _postsStore = intMapStoreFactory.store(DBConstants.STORE_NAME);
+  final _store = intMapStoreFactory.store(DBConstants.STORE_NAME);
 
   // Private getter to shorten the amount of code needed to get the
   // singleton instance of an opened database.
-//  Future<Database> get _db async => await AppDatabase.instance.database;
+  //  Future<Database> get _db async => await AppDatabase.instance.database;
 
   // database instance
   final Database _db;
@@ -21,21 +22,25 @@ class PostDataSource {
   PostDataSource(this._db);
 
   // DB functions:--------------------------------------------------------------
-  Future<int> insert(Post post) async {
-    return await _postsStore.add(await _db, post.toMap());
+  @override
+  Future<int> insert(dynamic _post) async {
+    Post post = _post;
+    return await _store.add(await _db, post.toMap());
   }
 
+  @override
   Future<int> count() async {
-    return await _postsStore.count(await _db);
+    return await _store.count(await _db);
   }
 
+  @override
   Future<List<Post>> getAllSortedByFilter({List<Filter>? filters}) async {
     //creating finder
     final finder = Finder(
         filter: filters != null ? Filter.and(filters) : null,
         sortOrders: [SortOrder(DBConstants.FIELD_ID)]);
 
-    final recordSnapshots = await _postsStore.find(
+    final recordSnapshots = await _store.find(
       await _db,
       finder: finder,
     );
@@ -49,7 +54,8 @@ class PostDataSource {
     }).toList();
   }
 
-  Future<PostList> getPostsFromDb() async {
+  @override
+  Future<PostList> getList() async {
 
     print('Loading from database');
 
@@ -57,7 +63,7 @@ class PostDataSource {
     var postsList;
 
     // fetching data
-    final recordSnapshots = await _postsStore.find(
+    final recordSnapshots = await _store.find(
       await _db,
     );
 
@@ -75,27 +81,32 @@ class PostDataSource {
     return postsList;
   }
 
-  Future<int> update(Post post) async {
+  @override
+  Future<int> update(dynamic _post) async {
     // For filtering by key (ID), RegEx, greater than, and many other criteria,
     // we use a Finder.
+    Post post = _post;
     final finder = Finder(filter: Filter.byKey(post.id));
-    return await _postsStore.update(
+    return await _store.update(
       await _db,
       post.toMap(),
       finder: finder,
     );
   }
 
-  Future<int> delete(Post post) async {
+  @override
+  Future<int> delete(dynamic _post) async {
+    Post post = _post;
     final finder = Finder(filter: Filter.byKey(post.id));
-    return await _postsStore.delete(
+    return await _store.delete(
       await _db,
       finder: finder,
     );
   }
 
+  @override
   Future deleteAll() async {
-    await _postsStore.drop(
+    await _store.drop(
       await _db,
     );
   }

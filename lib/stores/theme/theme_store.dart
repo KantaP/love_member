@@ -1,4 +1,4 @@
-import 'package:boilerplate/data/repository.dart';
+import 'package:boilerplate/data/repositories/theme/theme_repository.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -13,7 +13,7 @@ abstract class _ThemeStore with Store {
   final String TAG = "_ThemeStore";
 
   // repository instance
-  final Repository _repository;
+  final ThemeRepository _repository;
 
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
@@ -27,7 +27,7 @@ abstract class _ThemeStore with Store {
   bool get darkMode => _darkMode;
 
   // constructor:---------------------------------------------------------------
-  _ThemeStore(Repository repository)
+  _ThemeStore(ThemeRepository repository)
       : this._repository = repository {
     init();
   }

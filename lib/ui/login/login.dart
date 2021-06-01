@@ -1,5 +1,7 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:boilerplate/constants/assets.dart';
+import 'package:boilerplate/constants/base.dart';
+import 'package:boilerplate/constants/colors.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/stores/form/form_store.dart';
@@ -59,38 +61,52 @@ class _LoginScreenState extends State<LoginScreen> {
   // body methods:--------------------------------------------------------------
   Widget _buildBody() {
     return Material(
-      child: Stack(
-        children: <Widget>[
-          MediaQuery.of(context).orientation == Orientation.landscape
-              ? Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: _buildLeftSide(),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: _buildRightSide(),
-                    ),
-                  ],
-                )
-              : Center(child: _buildRightSide()),
-          Observer(
-            builder: (context) {
-              return _store.success
-                  ? navigate(context)
-                  : _showErrorMessage(_store.errorStore.errorMessage);
-            },
-          ),
-          Observer(
-            builder: (context) {
-              return Visibility(
-                visible: _store.loading,
-                child: CustomProgressIndicatorWidget(),
-              );
-            },
-          )
-        ],
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(Assets.bgLogo),
+              fit: BoxFit.contain,
+            ),
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppColors.primaryColor[500]!,
+                  AppColors.primaryColor[900]!
+                ])),
+        child: Stack(
+          children: <Widget>[
+            MediaQuery.of(context).orientation == Orientation.landscape
+                ? Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: _buildLeftSide(),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: _buildRightSide(),
+                      ),
+                    ],
+                  )
+                : Center(child: _buildRightSide()),
+            Observer(
+              builder: (context) {
+                return _store.success
+                    ? navigate(context)
+                    : _showErrorMessage(_store.errorStore.errorMessage);
+              },
+            ),
+            Observer(
+              builder: (context) {
+                return Visibility(
+                  visible: _store.loading,
+                  child: CustomProgressIndicatorWidget(),
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }
@@ -110,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             AppIconWidget(image: 'assets/icons/ic_appicon.png'),
@@ -172,16 +188,15 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildForgotPasswordButton() {
     return Align(
       alignment: FractionalOffset.centerRight,
-      child: FlatButton(
-        padding: EdgeInsets.all(0.0),
+      child: TextButton(
+        onPressed: () {},
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.all(0.0),
+        ),
         child: Text(
           AppLocalizations.of(context).translate('login_btn_forgot_password'),
-          style: Theme.of(context)
-              .textTheme
-              .caption
-              ?.copyWith(color: Colors.orangeAccent),
+          style: Base.linkText,
         ),
-        onPressed: () {},
       ),
     );
   }
@@ -189,7 +204,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildSignInButton() {
     return RoundedButtonWidget(
       buttonText: AppLocalizations.of(context).translate('login_btn_sign_in'),
-      buttonColor: Colors.orangeAccent,
+      buttonColor: AppColors.primaryColor[500]!,
+      buttonSide: BorderSide(width: 0.0, style: BorderStyle.none, color: Colors.white),
       textColor: Colors.white,
       onPressed: () async {
         if (_store.canLogin) {

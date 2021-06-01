@@ -26,7 +26,8 @@ abstract class _FormStore with Store {
     _disposers = [
       reaction((_) => userEmail, validateUserEmail),
       reaction((_) => password, validatePassword),
-      reaction((_) => confirmPassword, validateConfirmPassword)
+      reaction((_) => confirmPassword, validateConfirmPassword),
+      reaction((_) => mobileNumber , validateMobileNumber),
     ];
   }
 
@@ -45,6 +46,12 @@ abstract class _FormStore with Store {
 
   @observable
   bool loading = false;
+
+  @observable
+  String mobileNumber = '';
+
+  @observable
+  List<int> otp = [];
 
   @computed
   bool get canLogin =>
@@ -142,6 +149,27 @@ abstract class _FormStore with Store {
     loading = true;
   }
 
+  @action
+  void validateMobileNumber(String value) {
+    if (value.isEmpty) {
+      formErrorStore.mobileNumber = "Mobile number can't be empty";
+    } else {
+      formErrorStore.mobileNumber = null;
+    }
+  }
+
+  @action void addOtpItem(int item) {
+    otp.add(item);
+  }
+
+  @action void validateOtp(List<int> otpSystem , List<int> otpUser) {
+    if(otpSystem.join('').toString() != otpUser.join('').toString()) {
+        formErrorStore.otp = 'Otp invalid';
+    } else {
+      formErrorStore.otp = null;
+    }
+  }
+
   // general methods:-----------------------------------------------------------
   void dispose() {
     for (final d in _disposers) {
@@ -166,6 +194,12 @@ abstract class _FormErrorStore with Store {
 
   @observable
   String? confirmPassword;
+
+  @observable
+  String? mobileNumber;
+
+  @observable
+  String? otp;
 
   @computed
   bool get hasErrorsInLogin => userEmail != null || password != null;

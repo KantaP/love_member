@@ -1,9 +1,12 @@
+import 'package:boilerplate/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: AppColors.primaryColor[500]!,
+    );
   }
 
   @override

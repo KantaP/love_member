@@ -1,8 +1,7 @@
+import 'package:boilerplate/data/repositories/user/i_user_repository.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../data/repository.dart';
 import '../form/form_store.dart';
 
 part 'user_store.g.dart';
@@ -12,7 +11,7 @@ class UserStore = _UserStore with _$UserStore;
 
 abstract class _UserStore with Store {
   // repository instance
-  final Repository _repository;
+  final IUserRepository _repository;
 
   // store for handling form errors
   final FormErrorStore formErrorStore = FormErrorStore();
@@ -24,7 +23,7 @@ abstract class _UserStore with Store {
   bool isLoggedIn = false;
 
   // constructor:---------------------------------------------------------------
-  _UserStore(Repository repository) : this._repository = repository {
+  _UserStore(IUserRepository repository) : this._repository = repository {
 
     // setting up disposers
     _setupDisposers();

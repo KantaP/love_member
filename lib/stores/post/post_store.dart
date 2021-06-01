@@ -1,4 +1,4 @@
-import 'package:boilerplate/data/repository.dart';
+import 'package:boilerplate/data/repositories/post/i_post_repository.dart';
 import 'package:boilerplate/models/post/post_list.dart';
 import 'package:boilerplate/stores/error/error_store.dart';
 import 'package:boilerplate/utils/dio/dio_error_util.dart';
@@ -11,14 +11,17 @@ part 'post_store.g.dart';
 class PostStore = _PostStore with _$PostStore;
 
 abstract class _PostStore with Store {
+
+  
   // repository instance
-  late Repository _repository;
+  late final IPostRepository _repository;
+  // late Repository _repository;
 
   // store for handling errors
   final ErrorStore errorStore = ErrorStore();
 
   // constructor:---------------------------------------------------------------
-  _PostStore(Repository repository) : this._repository = repository;
+  _PostStore(IPostRepository repository) : this._repository = repository;
 
   // store variables:-----------------------------------------------------------
   static ObservableFuture<PostList?> emptyPostResponse =
